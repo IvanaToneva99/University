@@ -1,0 +1,48 @@
+<section class="container">
+  <div class="login-container">
+    <div class="circle circle-one"></div>
+    <div class="form-container">
+      <img
+        src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
+        alt="illustration" class="illustration"/>
+      <h1 class="opacity">Вход</h1>
+      <form [formGroup]="loginForm">
+
+        <input type="text" placeholder="Потребителко име" [formControl]="loginForm.controls.userName"/>
+        <div class="alert alert-danger"
+             *ngIf="loginForm.controls.userName.invalid && (loginForm.controls.userName.dirty || loginForm.controls.userName.touched)">
+
+          <div *ngIf="!!(loginForm.controls.userName.errors || {})['required']">
+            Задължително поле.
+          </div>
+          <div *ngIf="!!(loginForm.controls.userName.errors || {})['pattern']">
+            Потребителското име трябва да започва с буква и да е между 8 и 30 символа.
+          </div>
+        </div>
+
+        <input type="password" placeholder="Парола" [formControl]="loginForm.controls.password"/>
+
+        <div class="alert alert-danger"
+             *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)">
+
+          <div *ngIf="!!(loginForm.controls.password.errors || {})['required']">
+            Задължително поле.
+          </div>
+          <div *ngIf="!!(loginForm.controls.password.errors || {})['pattern']">
+            Паролата трябва да е минимум 8 знака и да съдържа една главна буква, една малка буква, число и специален
+            знак.
+          </div>
+        </div>
+
+        <span *ngIf="!!errorMessage" class="alert alert-danger">{{errorMessage}}</span>
+
+        <button class="opacity" (click)="onLogin()">Влез</button>
+      </form>
+      <div class="register-forget opacity">
+        <button class="opacity" (click)="onRegistration()">Нямаш профил? Регистрирай се тук!</button>
+      </div>
+    </div>
+    <div class="circle circle-two"></div>
+  </div>
+  <div class="theme-btn-container"></div>
+</section>

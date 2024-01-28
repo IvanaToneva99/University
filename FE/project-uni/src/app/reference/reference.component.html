@@ -1,0 +1,65 @@
+<div class="container" *ngIf="showUserPage">
+  <h2>Справки</h2>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Име на курс</div>
+      <div class="col col-1">Материали</div>
+      <div class="col col-1">Задачи</div>
+      <div class="col col-2">Преподавател</div>
+      <div class="col col-3" *ngIf="!isCurrentUserStudent()">Студенти</div>
+      <div class="col col-4" *ngIf="!isCurrentUserStudent()">Действие</div>
+    </li>
+    <li class="table-row" *ngFor="let course of coursesData">
+      <div class="col col-1" data-label="Cource name">{{course.name}}</div>
+      <div class="col col-1" data-label="Materials">{{course.materials}}</div>
+      <div class="col col-1" data-label="Tasks">{{course.tasks}}</div>
+      <div class="col col-2"
+           data-label="Teacher">{{(course.teacher.firstName || '') + " " + (course.teacher.lastName || '')}}</div>
+      <div class="col col-3" data-label="Students" *ngIf="!isCurrentUserStudent()">{{getStudentsLabel(course)}}</div>
+      <div class="col col-4" data-label="Action" *ngIf="!isCurrentUserStudent()">
+        <button (click)="onEditClick(course)" class="edit-button">Редактиране</button>
+        <button (click)="onDeleteCourse(course) " class="delete-button">Изтриване</button>
+      </div>
+    </li>
+
+    <button *ngIf="!isCurrentUserStudent()" (click)="onAddClick()" class="add-button">Добавяне</button>
+  </ul>
+</div>
+
+<div class="edit-container" *ngIf="showEditUserForm">
+  <div class="edit-user-container">
+    <h1 class="opacity">Редактиране на курс</h1>
+    <form [formGroup]="subjectForm">
+
+      <input type="text" placeholder="Име" [formControl]="subjectForm.controls.name"/>
+
+      <input type="text" placeholder="Материали" [formControl]="subjectForm.controls.materials"/>
+
+      <input type="text" placeholder="Задачи" [formControl]="subjectForm.controls.tasks"/>
+
+      <input type="text" placeholder="Преподавател" [formControl]="subjectForm.controls.teacher" readonly>
+
+      <button (click)="onEditCourse()" class="edit-button">Редактиране</button>
+      <button (click)="onCancelClick()" class="add-button">Назад</button>
+    </form>
+  </div>
+</div>
+
+<div class="edit-container" *ngIf="showAddSubjectForm">
+  <div class="edit-user-container">
+    <h1 class="opacity">Добавяне на курс</h1>
+    <form [formGroup]="subjectForm">
+
+      <input type="text" placeholder="Име" [formControl]="subjectForm.controls.name"/>
+
+      <input type="text" placeholder="Материали" [formControl]="subjectForm.controls.materials"/>
+
+      <input type="text" placeholder="Задачи" [formControl]="subjectForm.controls.tasks"/>
+
+      <span *ngIf="shouldShowEmptyFieldsError"
+            class="alert alert-danger">{{'Полетата не трябва да бъдат празни'}}</span>
+      <button (click)="onAddCourse()" class="add-button">Добавяне</button>
+      <button (click)="onCancelClick()" class="add-button">Назад</button>
+    </form>
+  </div>
+</div>

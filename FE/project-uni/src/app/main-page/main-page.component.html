@@ -1,0 +1,66 @@
+<section class="cards">
+
+  <article class="card card--1" *ngIf="isCurrentUserStudent()">
+
+    <div class="card__img"></div>
+    <button (click)="onOpenStudentCourses()" class="card_link">
+      <div class="card__img--hover"></div>
+    </button>
+    <div class="card__info">
+      <span class="card__category">Тук ще намериш всички налични курсове!</span>
+      <h3 class="card__title">Курсове</h3>
+    </div>
+
+  </article>
+
+  <article class="card card--2" *ngIf="isCurrentUserStudentOrTeacher() || isCurrentUserAdmin()">
+
+    <div class="card__img"></div>
+    <button (click)="onOpenReferences()" class="card_link">
+      <div class="card__img--hover"></div>
+    </button>
+    <div class="card__info">
+      <span class="card__category">Направи своята справка тук!</span>
+      <h3 class="card__title">Справки</h3>
+    </div>
+
+  </article>
+
+  <article class="card card--3" *ngIf="isCurrentUserTeacher()">
+
+    <div class="card__img"></div>
+    <button class="card_link">
+      <div class="card__img--hover"></div>
+    </button>
+    <div class="card__info">
+      <span class="card__category">Прегледай и нанеси оценките тук!</span>
+      <h3 class="card__title">Тестова система</h3>
+    </div>
+  </article>
+
+  <article class="card card--4">
+
+    <div class="card__img"></div>
+    <button class="card_link">
+      <div class="card__img--hover"></div>
+    </button>
+    <div class="card__info">
+      <span class="card__category">Създай своя график тук!</span>
+      <h3 class="card__title">Седмично разпределение</h3>
+    </div>
+  </article>
+
+  <article class="card card--5" *ngIf="isCurrentUserAdmin()">
+
+    <div class="card__img"></div>
+    <button (click)="onOpenUsers()" class="card_link">
+      <div class="card__img--hover"></div>
+    </button>
+    <div class="card__info">
+      <span class="card__category">Тук са представени всички регистрирани потребители в системата.</span>
+      <h3 class="card__title">Потребители</h3>
+    </div>
+
+  </article>
+
+</section>

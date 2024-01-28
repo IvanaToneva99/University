@@ -1,0 +1,11 @@
+<router-outlet></router-outlet>
+<nav class="mainNav">
+  <div class="mainNav__links">
+    <button class="home-page-button" (click)="onMainPageClick()">Начална страница</button>
+    <button *ngIf="!shouldShowLogOutButton()" (click)="showRegisterForm()" class="home-page-button">
+      Регистрирай се тук!
+    </button>
+    <button *ngIf="!shouldShowLogOutButton()" (click)="showLoginForm()" class="home-page-button">Вход</button>
+    <button *ngIf="shouldShowLogOutButton()" (click)="onLogOutButton()" class="home-page-button">Изход</button>
+  </div>
+</nav>

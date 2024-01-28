@@ -1,0 +1,49 @@
+<div class="container" *ngIf="showUserPage">
+  <h2>Регистрирани потребители</h2>
+  <ul class="responsive-table">
+    <li class="table-header">
+      <div class="col col-1">Име</div>
+      <div class="col col-1">Фамилия</div>
+      <div class="col col-2">Потребителско име</div>
+      <div class="col col-5">Имейл</div>
+      <div class="col col-5">Роля</div>
+      <div class="col col-4">Действие</div>
+    </li>
+    <li class="table-row" *ngFor="let user of userData">
+      <div class="col col-1" data-label="First Name">{{user.firstName}}</div>
+      <div class="col col-1" data-label="Last Name">{{user.lastName}}</div>
+      <div class="col col-2" data-label="Username">{{user.username}}</div>
+      <div class="col col-5" data-label="Email">{{user.email}}</div>
+      <div class="col col-5" data-label="Role">{{getRoleLabel(user.role)}}</div>
+      <div class="col col-4" data-label="Payment Status">
+        <button (click)="onEditClick(user)" class="edit-button">Редактиране</button>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<div class="edit-container">
+  <div *ngIf="showEditUserForm" class="edit-user-container">
+    <h1 class="opacity">Редактиране на потребител</h1>
+    <form [formGroup]="registrationForm">
+
+      <input type="text" placeholder="Име" [formControl]="registrationForm.controls.firstName"/>
+
+      <input type="text" placeholder="Фамилно име" [formControl]="registrationForm.controls.lastName"/>
+
+      <input type="text" placeholder="Потребителско име" [formControl]="registrationForm.controls.userName" readonly/>
+
+      <input type="text" placeholder="E-mail" [formControl]="registrationForm.controls.email"/>
+
+      <select class="opacity-role" [formControl]="registrationForm.controls.role">
+        <option value="">Заемана длъжност</option>
+        <option [value]="USER_ROLES.STUDENT">Студент</option>
+        <option [value]="USER_ROLES.TEACHER">Преподавател</option>
+        <option [value]="USER_ROLES.ADMIN">Администратор</option>
+      </select>
+
+      <button (click)="onEditUser()" class="edit-button">Редактиране</button>
+      <button (click)="onCancelClick()" class="add-button">Назад</button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,95 @@
+<section class="container">
+  <div class="login-container">
+    <div class="circle circle-one"></div>
+    <div class="form-container">
+      <img
+        src="https://raw.githubusercontent.com/hicodersofficial/glassmorphism-login-form/master/assets/illustration.png"
+        alt="illustration" class="illustration"/>
+      <h1 class="opacity">Регистрация</h1>
+      <form [formGroup]="registrationForm">
+                    <input type="text" placeholder="Име" [formControl]="registrationForm.controls.firstName" />
+                <div class="alert alert-danger" *ngIf="registrationForm.controls.firstName.invalid && (registrationForm.controls.firstName.dirty || registrationForm.controls.firstName.touched)">
+
+                    <div *ngIf="!!(registrationForm.controls.firstName.errors || {})['required']">
+                        Задължително поле.
+                    </div>
+                    <div *ngIf="!!(registrationForm.controls.firstName.errors || {})['pattern']">
+                        Името трябва да започва с буква и да е между 2 и 10 символа.
+                    </div>
+                </div>
+
+                    <input type="text" placeholder="Фамилия" [formControl]="registrationForm.controls.lastName" />
+                    <div class="alert alert-danger" *ngIf="registrationForm.controls.lastName.invalid && (registrationForm.controls.lastName.dirty || registrationForm.controls.lastName.touched)">
+
+                <div *ngIf="!!(registrationForm.controls.lastName.errors || {})['required']">
+                        Задължително поле.
+                    </div>
+                    <div *ngIf="!!(registrationForm.controls.lastName.errors || {})['pattern']">
+                     Фамилията трябва да започва с буква и да е между 2 и 10 символа.
+                    </div>
+                </div>
+
+        <input type="text" placeholder="Потребителко име" [formControl]="registrationForm.controls.userName"/>
+        <div class="alert alert-danger"
+             *ngIf="registrationForm.controls.userName.invalid && (registrationForm.controls.userName.dirty || registrationForm.controls.userName.touched)">
+
+          <div *ngIf="!!(registrationForm.controls.userName.errors || {})['required']">
+            Задължително поле.
+          </div>
+          <div *ngIf="!!(registrationForm.controls.userName.errors || {})['pattern']">
+            Потребителското име трябва да започва с буква и да е между 8 и 30 символа.
+          </div>
+        </div>
+
+        <input type="text" placeholder="E-mail" [formControl]="registrationForm.controls.email"/>
+        <div class="alert alert-danger"
+             *ngIf="registrationForm.controls.email.invalid && (registrationForm.controls.email.dirty || registrationForm.controls.email.touched)">
+
+          <div *ngIf="!!(registrationForm.controls.email.errors || {})['required']">
+            Задължително поле.
+          </div>
+
+          <div *ngIf="!!(registrationForm.controls.email.errors || {})['pattern']">
+            {{emailErrorMessage}}
+          </div>
+        </div>
+        <input type="password" placeholder="Парола" [formControl]="registrationForm.controls.password"/>
+
+        <div class="alert alert-danger"
+             *ngIf="registrationForm.controls.password.invalid && (registrationForm.controls.password.dirty || registrationForm.controls.password.touched)">
+
+          <div *ngIf="!!(registrationForm.controls.password.errors || {})['required']">
+            Задължително поле.
+          </div>
+
+          <div *ngIf="!!(registrationForm.controls.password.errors || {})['pattern']">
+            Паролата трябва да е минимум 8 знака и да съдържа една главна буква, една малка буква, число и специален
+            знак.
+          </div>
+        </div>
+        <input type="password" placeholder="Повтори паролата" [formControl]="registrationForm.controls.repeatPassword"/>
+
+        <div class="alert alert-danger"
+             *ngIf="registrationForm.controls.repeatPassword.invalid && (registrationForm.controls.repeatPassword.dirty || registrationForm.controls.repeatPassword.touched)">
+
+          <div *ngIf="!!(registrationForm.controls.repeatPassword.errors || {})['required']">
+            Задължително поле.
+          </div>
+
+                        <div *ngIf="!!(registrationForm.controls.repeatPassword.errors || {})['pattern']">
+                            Паролата трябва да е минимум 8 знака и да съдържа една главна буква, една малка буква, число и специален знак.
+                        </div>
+                    </div>
+
+        <span *ngIf="passwordError" class="alert alert-danger">Паролите не съвпадат!</span>
+        <button class="opacity" (click)="onRegister()">Регистрирай ме!</button>
+        <span *ngIf="!!errorMessage" class="alert alert-danger">{{errorMessage}}</span>
+      </form>
+      <div class="register-forget opacity">
+        <button class="opacity" (click)="haveAProfile()">Вече имаш профил. Цъкни тук!</button>
+      </div>
+    </div>
+    <div class="circle circle-two"></div>
+  </div>
+  <div class="theme-btn-container"></div>
+</section>

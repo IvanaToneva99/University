@@ -1,0 +1,50 @@
+<div class="container" *ngIf="showCoursePage">
+    <h2>Налични Курсове</h2>
+    <ul class="responsive-table">
+        <li class="table-header">
+            <div class="col col-1">Име на курс</div>
+            <div class="col col-1">Материали</div>
+            <div class="col col-1">Задачи</div>
+            <div class="col col-2">Преподавател</div>
+            <div class="col col-4">Действие</div>
+        </li>
+        <li class="table-row" *ngFor="let course of coursesData">
+            <div class="col col-1" data-label="Cource name">{{course.name}}</div>
+            <div class="col col-1" data-label="Materials">{{course.materials}}</div>
+            <div class="col col-1" data-label="Tasks">{{course.tasks}}</div>
+            <div class="col col-2"
+                 data-label="Teacher">{{(course.teacher.firstName || '') + " " + (course.teacher.lastName || '')}}</div>
+            <div class="col col-4" data-label="Action">
+                <button (click)="onAddClick(course)" class="add-button">Запиши</button>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div class="details-modal" *ngIf="showAddSubjectForm">
+    <div class="details-modal-title">
+        <h1>Сигурни ли сте, че искате да запишете този курс?</h1>
+    </div>
+    <div class="details-modal-content">
+        <p>
+            С натискането на бутона потвърждавам, избраният от вас курс ще бъде записан.
+            Може да проверите записаните от вас курсове в менюто "Справки".
+        </p>
+
+        <button (click)="onSubmitCourse()" type="button" class="btn btn-primary agree">Потвърждавам</button>
+        <button (click)="onCancelClick()" type="button" class="btn btn-secondary" data-dismiss="modal">Отказ</button>
+    </div>
+</div>
+
+<div class="details-modal" *ngIf="showSuccessfulAddSubjectForm">
+    <div class="details-modal-title">
+        <h1>Курсът е записан успешно</h1>
+    </div>
+    <div class="details-modal-content">
+        <p>
+            Вие записахте курсът успешно!
+        </p>
+
+        <button (click)="onOkClick()" type="button" class="btn btn-primary agree">Добре</button>
+    </div>
+</div>
